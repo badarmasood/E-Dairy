@@ -122,19 +122,11 @@ const MyProducts = (prop, { navigation }) => {
   return (
     <TouchableOpacity style={style.card} onPress={prop.click}>
       <View style={{ alignItems: "center", top: -60 }}>
-        <Image
-          source={{
-            uri: prop.product,
-          }}
-          style={{ height: 120, width: 150 }}
-        />
+        <Image source={prop.product} style={{ height: 120, width: 150 }} />
 
         <View style={{ marginHorizontal: 20, alignItems: "center" }}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>
             {prop.tittle}
-          </Text>
-          <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
-            {prop.quantity}
           </Text>
         </View>
 
@@ -147,7 +139,7 @@ const MyProducts = (prop, { navigation }) => {
         >
           <Text
             style={{
-              fontSize: 17,
+              fontSize: 14,
               fontWeight: "bold",
               marginRight: 50,
             }}
@@ -168,18 +160,6 @@ function HomeScreen({ navigation }) {
   // Firebase
 
   const [data, setData] = useState({});
-  useEffect(() => {
-    fireDb.child("products").on("value", (snapshot) => {
-      if (snapshot.val() !== null) {
-        setData({ ...snapshot.val() });
-      } else {
-        setData({});
-      }
-    });
-    return () => {
-      setData({});
-    };
-  }, []);
 
   return (
     <View style={style.container}>
@@ -189,64 +169,87 @@ function HomeScreen({ navigation }) {
         contentContainerStyle={{
           flexDirection: "row",
           flexWrap: "wrap",
-          paddingHorizontal: 10,
-          marginTop: -10,
-          paddingBottom: 10,
         }}
       >
-        {Object.keys(data).map((id, index) => {
-          const myproduct = "../../assets/" + data[id].title + ".png";
-
-          return (
-            <View style={{ width: "50%", flexDirection: "row" }}>
-              <MyProducts
-                product={data[id].link}
-                tittle={data[id].title}
-                quantity={data[id].Quantity + data[id].Unit}
-                price={data[id].Price}
-                click={() => {
-                  navigation.navigate("DetailScreen", {
-                    title: data[id].title,
-                    price: data[id].Price,
-                    image: data[id].link,
-                  });
-                }}
-              />
-            </View>
-          );
-        })}
-
-        {/*
-          <MyProducts
-            product={Eggs}
-            tittle="Eggs"
-            quantity="1 Dozen"
-            price='10$'
-            click={() => {
-              navigation.navigate("DetailScreen", { title: "Eggs", image: Eggs });
-            }}
-          />
-        </View>
         <View style={{ flexDirection: "row" }}>
           <MyProducts
-            product={yogurt}
+            product={Yogurt}
             tittle="Yogurt"
             quantity="1 kg"
-            price='15$'
+            price="15$"
             click={() => {
-              navigation.navigate("DetailScreen", { title: "Yogurt",image: yogurt });
+              navigation.navigate("DetailScreen", {
+                title: "Yogurt",
+                image: Yogurt,
+              });
             }}
           />
           <MyProducts
             product={Ghee}
             tittle="Desi Ghee"
             quantity="1 kg"
-            price='30$'
+            price="30$"
             click={() => {
-              navigation.navigate("DetailScreen", { title: "Ghee",image: Ghee });
+              navigation.navigate("DetailScreen", {
+                title: "Ghee",
+                image: Ghee,
+              });
             }}
           />
-          */}
+        </View>
+
+        <View style={{ flexDirection: "row" }}>
+          <MyProducts
+            product={Yogurt}
+            tittle="Yogurt"
+            quantity="1 kg"
+            price="15$"
+            click={() => {
+              navigation.navigate("DetailScreen", {
+                title: "Yogurt",
+                image: Yogurt,
+              });
+            }}
+          />
+          <MyProducts
+            product={Ghee}
+            tittle="Desi Ghee"
+            quantity="1 kg"
+            price="30$"
+            click={() => {
+              navigation.navigate("DetailScreen", {
+                title: "Ghee",
+                image: Ghee,
+              });
+            }}
+          />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <MyProducts
+            product={Yogurt}
+            tittle="Yogurt"
+            quantity="1 kg"
+            price="15$"
+            click={() => {
+              navigation.navigate("DetailScreen", {
+                title: "Yogurt",
+                image: Yogurt,
+              });
+            }}
+          />
+          <MyProducts
+            product={Ghee}
+            tittle="Desi Ghee"
+            quantity="1 kg"
+            price="30$"
+            click={() => {
+              navigation.navigate("DetailScreen", {
+                title: "Ghee",
+                image: Ghee,
+              });
+            }}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -303,7 +306,7 @@ const style = StyleSheet.create({
   },
   card: {
     height: 150,
-    width: 160,
+    width: 155,
     marginHorizontal: 10,
     marginBottom: 20,
     marginTop: 90,
